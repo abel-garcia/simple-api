@@ -1,5 +1,8 @@
 const Connection = require('../connection/mysql.js');
 
+/**
+ * esta funcion inserta un nuevo usuario a la tabla users 
+ */
 var userPost = (req,res) => {
     var user = req.body; //{Name:"Abel Garcia",Salary:1000.0,Position:"developer"}
     Connection.query('INSERT INTO users SET ?',user,(err,response) => {
@@ -8,6 +11,9 @@ var userPost = (req,res) => {
     });
 };
 
+/**
+ * esta funcion retorna todos los usuarios de la tabla users de la base de datos
+ */
 var userGet = (req,res) => {
     Connection.query('SELECT * FROM users',(err,response) => {
         if(err) res.status(400).json(err);
@@ -15,6 +21,9 @@ var userGet = (req,res) => {
     });
 };
 
+/**
+ * esta funcion actualiza registros de la tabla users
+ */
 var userPut = (req,res) => {
     var set = req.body.set
     var IdUser = {IdUser:req.body.IdUser}
@@ -24,6 +33,9 @@ var userPut = (req,res) => {
     });
 };
 
+/**
+ * esta funcion elimina registros de la tabla users
+ */
 var userDelete = (req,res) => {
     var IdUser = {IdUser:req.body.IdUser};
     Connection.query('DELETE FROM users WHERE ?',IdUser,(err,response) => {
@@ -32,7 +44,10 @@ var userDelete = (req,res) => {
     });
 };
 
-
+/*
+* exporta las funciones para ser utilizadas en el 
+* modulo ./routers.js
+*/
 module.exports =  {
     post:userPost,
     get:userGet,

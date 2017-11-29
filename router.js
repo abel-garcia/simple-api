@@ -1,5 +1,9 @@
 const UserController = require('./app/controller/UserController.js');
 
+/**
+ * en este modulo se declaran todas las rutas del la app
+ * @param {*} app 
+ */
 function router(app) {
     app.post('/api/user',UserController.post);
     app.get('/api/user',UserController.get);
